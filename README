@@ -8,7 +8,9 @@ SO THE FAR-REACHING CONCLUSION MIGHT BE THAT FOR MAPS/HASHMAPS (MAPS STEM FROM H
 THAT MAY BE EXPENSIVE. the cashed value of the hashcode you may decide to count (hash method of Object and more options) when one of many property belonging to the object changes 
 so you need to use setters for each property.
 BUT IF YOU EQUALITY-COMPARE TWO OBJECTS/VARIABLES ONLY == OPERATOR IS ENTERED, NEVER HASCODE
+Other conslusions, using good hash codes make additional sense it make sense for f.e. maps consisting of "million" elements, but for rarely used little maps, not map and not very often used for comparison single custom class objects hashcode is not that important. And if you really often use not for map but very, very often used two objects comparison you may call obj.hashcode == obj2.hashcode possibly - if you know what you are doing :)
 INITIAL CONCLUSIONS AS FOR NOW...
+
 
 class hashtest {
   bool? istrue;
