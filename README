@@ -1,0 +1,123 @@
+dart language snap test for overrigin == operator and hascode.
+very snap conclusion. If you have a map, it can ad a key which is object of a custom class when it's identityhashcode is different that of any other key already in the map, 
+also it's hashcode is different than of any other key in the map 
+AND ONLY WHEN THE HASHCODE IS DIFFERENT EQUAL OVERRIDEN OPERATOR "==" IS CHECKED, OTHERWISE IT IS NOT. WHEN == RETURN FALSE A NEW KEY IS ADDED
+SO THE FAR-REACHING CONCLUSION MIGHT BE YOU MAY USE A LOW PROCESSOR-CONSUMING CASHED HASHCODE value WHENEVER POSSIBLE (NOT TO COUNT IT EACH TIME hashcode HASHCODE) TO AVOID ENTERING INTO EQUAL == OPERATOR
+THAT MAY BE EXPENSIVE. the cashed value of the hashcode you may decide to count (hash method of Object and more options) when one of many property belonging to the object changes 
+so you need to use setters for each property.
+
+class hashtest {
+  bool? istrue;
+  bool returntrueforequaloperator;
+
+  hashtest({this.istrue = true, this.returntrueforequaloperator = true});
+
+  @override
+  bool operator ==(dynamic other) {
+    debugPrint('we entered here 2');
+    return returntrueforequaloperator;
+  }
+
+  /// Added because of this recommendation https://dart.dev/tools/linter-rules/hash_and_equals the overriden "==" operator is no longer marked by linter so the editor is more happy :)
+  @override
+  int get hashCode {
+    debugPrint('we entered here 1');
+    if (istrue == null)
+      return 15;
+    else if (istrue != null && istrue == true)
+      return 5;
+    else
+      return 8;
+  }
+}
+
+testwww() async {
+  var abcrt1 = hashtest(
+      //returntrueforequaloperator: false
+      );
+  var abcrt2 = abcrt1;
+  debugPrint('Equal = ${[1, 2] == [1, 2]}');
+  debugPrint('hashtest equal = ${hashtest() == hashtest()}');
+  debugPrint('hashtest equal = ${abcrt1 == abcrt2}');
+  debugPrint('hashtest identical = ${identical(hashtest(), hashtest())}');
+  debugPrint('hashtest identical = ${identical(abcrt1, abcrt2)}');
+  debugPrint('===================================');
+  debugPrint('hashtest 1 map = ${{abcrt1: 5}}');
+  debugPrint('===================================');
+  debugPrint('hashtest 2 map = ${{abcrt1: 5}..addAll({abcrt2: 10})}');
+  debugPrint('===================================');
+  debugPrint('hashtest 3 map = ${{abcrt1: 5, hashtest(): 12}}');
+  debugPrint('===================================');
+  debugPrint('hashtest 4 map = ${{abcrt1: 5, hashtest(istrue: false): 12}}');
+  debugPrint('===================================');
+  debugPrint('hashtest 5 map = ${{
+    abcrt1: 5,
+    hashtest(istrue: false): 12
+  }..addAll({abcrt2: 10})}');
+  debugPrint('===================================');
+
+  var abcrt3 = hashtest(returntrueforequaloperator: false);
+  var abcrt4 = abcrt3;
+  debugPrint('hashtest 5 v2 map = ${{
+    abcrt3: 5,
+    hashtest(istrue: false): 12
+  }..addAll({abcrt4: 10})}');
+
+  debugPrint('===================================');
+
+  debugPrint('hashtest 6 map = ${{
+    abcrt1: 5,
+    hashtest(istrue: false): 12
+  }..addAll({hashtest(istrue: null): 15})}');
+  debugPrint('===================================');
+//
+//
+//  Performing hot restart...
+//Restarted application in 738ms.
+//flutter: Equal = false
+//flutter: we entered here 2
+//flutter: hashtest equal = true
+//flutter: we entered here 2
+//flutter: hashtest equal = true
+//flutter: hashtest identical = false
+//flutter: hashtest identical = true
+//flutter: ===================================
+//flutter: we entered here 1
+//flutter: hashtest 1 map = {Instance of 'hashtest': 5}
+//flutter: ===================================
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 2
+//flutter: hashtest 2 map = {Instance of 'hashtest': 10}
+//flutter: ===================================
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 2
+//flutter: hashtest 3 map = {Instance of 'hashtest': 12}
+//flutter: ===================================
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: hashtest 4 map = {Instance of 'hashtest': 5, Instance of 'hashtest': 12}
+//flutter: ===================================
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 2
+//flutter: hashtest 5 map = {Instance of 'hashtest': 10, Instance of 'hashtest': 12}
+//flutter: ===================================
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 2
+//flutter: hashtest 5 v2 map = {Instance of 'hashtest': 5, Instance of 'hashtest': 12, Instance of 'hashtest': 10}
+//flutter: ===================================
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: we entered here 1
+//flutter: hashtest 6 map = {Instance of 'hashtest': 5, Instance of 'hashtest': 12, Instance of 'hashtest': 15}
+//flutter: ===================================
+//
