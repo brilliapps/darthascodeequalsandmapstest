@@ -1,4 +1,5 @@
 dart language snap test for overrigin == operator and hascode.
+HASHCODE IS USED IN MAPS AND SETS - THE LATTER NOT TESTED BUT IT IS LOGICAL WHILE LIST HAVE INT AS KEYS.
 very snap conclusion. If you have a map, it can ad a key which is object of a custom class when it's identityhashcode is different that of any other key already in the map, 
 also it's hashcode is different than of any other key in the map 
 AND ONLY WHEN THE HASHCODE IS DIFFERENT EQUAL OVERRIDEN OPERATOR "==" IS CHECKED, OTHERWISE IT IS NOT. WHEN == RETURN FALSE A NEW KEY IS ADDED
