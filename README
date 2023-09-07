@@ -2,9 +2,10 @@ dart language snap test for overrigin == operator and hascode.
 very snap conclusion. If you have a map, it can ad a key which is object of a custom class when it's identityhashcode is different that of any other key already in the map, 
 also it's hashcode is different than of any other key in the map 
 AND ONLY WHEN THE HASHCODE IS DIFFERENT EQUAL OVERRIDEN OPERATOR "==" IS CHECKED, OTHERWISE IT IS NOT. WHEN == RETURN FALSE A NEW KEY IS ADDED
-SO THE FAR-REACHING CONCLUSION MIGHT BE YOU MAY USE A LOW PROCESSOR-CONSUMING CASHED HASHCODE value WHENEVER POSSIBLE (NOT TO COUNT IT EACH TIME hashcode HASHCODE) TO AVOID ENTERING INTO EQUAL == OPERATOR
+SO THE FAR-REACHING CONCLUSION MIGHT BE THAT FOR MAPS/HASHMAPS (MAPS STEM FROM HASHMAPS) YOU MAY USE A LOW PROCESSOR-CONSUMING CASHED HASHCODE value WHENEVER POSSIBLE (NOT TO COUNT IT EACH TIME hashcode HASHCODE) TO AVOID ENTERING INTO EQUAL == OPERATOR
 THAT MAY BE EXPENSIVE. the cashed value of the hashcode you may decide to count (hash method of Object and more options) when one of many property belonging to the object changes 
 so you need to use setters for each property.
+BUT IF YOU EQUALITY-COMPARE TWO OBJECTS ONLY == OPERATOR IS ENTERED, NEVER HASCODE
 
 class hashtest {
   bool? istrue;
